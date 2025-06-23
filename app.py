@@ -30,7 +30,6 @@ def download():
             'preferredquality': '192',
         }],
         'outtmpl': os.path.join(output_dir, '%(title)s.%(ext)s'),
-        'ffmpeg_location': 'ffmpeg',
         'quiet': True,
         'noplaylist': False,
         'ignoreerrors': True
