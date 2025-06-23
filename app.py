@@ -11,7 +11,7 @@ output_dir = 'downloads'
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 
-# 🔁 Free rotating proxies
+# 🔁 Free rotating proxies to bypass 429
 proxy_list = [
     'http://8.210.117.141:8888',
     'http://45.92.108.112:80',
@@ -76,8 +76,9 @@ def download_audio():
         return jsonify({"status": "error", "message": str(e)}), 500
 
 @app.route("/", methods=["GET"])
-def root():
+def home():
     return "✅ YouTube Playlist MP3 Downloader API is running!"
 
 if __name__ == "__main__":
-    app.run(debug=True, port=10000)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
