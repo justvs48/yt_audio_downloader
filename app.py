@@ -1,9 +1,11 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import yt_dlp
 import os
 import uuid
 
 app = Flask(__name__)
+CORS(app)  # ✅ Fixes CORS issue
 
 @app.route('/')
 def index():
@@ -37,7 +39,7 @@ def download():
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download([playlist_url])
-        return jsonify({"status": "success", "message": f"Downloaded to folder: {download_id}"})
+        return jsonify({"status": "success", "message": f"{download_id}"})
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
 
